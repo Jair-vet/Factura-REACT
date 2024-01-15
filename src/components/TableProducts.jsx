@@ -1,4 +1,4 @@
-import React from 'react'
+import PropTypes from 'prop-types'
 
 export const TableProducts = ({ items }) => {
   return (
@@ -31,4 +31,8 @@ export const TableProducts = ({ items }) => {
         </table>
     </div>
   )
+}
+
+TableProducts.prototype = {
+    items: PropTypes.array.isRequired
 }
