@@ -1,4 +1,4 @@
-import React from 'react'
+import PropTypes from 'prop-types'
 
 export const InvoiceView = ({client, company}) => {
 
@@ -10,10 +10,8 @@ export const InvoiceView = ({client, company}) => {
         <div className="md:w-1/2">
             <h2 className="text-2xl md:text-left text-center">Datos del Cliente</h2>
             <div>
-                <p className="p-1 bg-purple-600 text-white border rounded-t-md">{ nameClient }</p>
-                <p className="p-1 border">{ lastName }</p>
-                <p className="p-1 border">{ country }</p>
-                <p className="p-1 border">{ city }</p>
+                <p className="p-1 bg-purple-600 text-white border rounded-t-md">{ nameClient } { lastName }</p>
+                <p className="p-1 border">{ country } / { city }</p>
                 <p className="p-1 border rounded-b-md">{ street } { number }</p>
             </div>
         </div>
@@ -27,4 +25,9 @@ export const InvoiceView = ({client, company}) => {
         </div>
     </div>
   )
+}
+
+InvoiceView.prototype = {
+    client: PropTypes.object.isRequired,
+    company: PropTypes.object.isRequired
 }
