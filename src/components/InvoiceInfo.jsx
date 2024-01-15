@@ -1,4 +1,4 @@
-import React from 'react'
+import PropTypes from 'prop-types'
 
 export const InvoiceInfo = ({ id, name }) => {
   return (
@@ -11,4 +11,9 @@ export const InvoiceInfo = ({ id, name }) => {
         </div>
     </div>
   )
+}
+
+InvoiceInfo.prototype = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired
 }
