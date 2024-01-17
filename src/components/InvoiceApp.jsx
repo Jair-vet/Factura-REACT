@@ -3,10 +3,11 @@ import { getInvoice } from "../services/getInvoice"
 import { InvoiceInfo } from "./InvoiceInfo"
 import { InvoiceView } from "./InvoiceView"
 import { TableProducts } from "./TableProducts"
+import { TotalView } from "./TotalView"
 
 export const InvoiceApp = () => {
 
-    const { id, name, client, company, items} = getInvoice()
+    const { id, name, client, company, items, total} = getInvoice()
 
   return (
     <div className="container mx-auto mt-4 rounded-md shadow-xl bg-white">
@@ -37,14 +38,37 @@ export const InvoiceApp = () => {
                             />
                     </div>
 
-                    <div className="p-2 flex justify-end">
-                        <button className="shadow-lg rounded-md duration-300 bg-green-800 text-sm text-white w-12">1149</button>
-                    </div>
+                    {/* Total */}
+                    <TotalView 
+                        total={total}
+                    />
 
                     {/* Button */}
                     <div className="p-2">
                         <button className="bg-gray-500 uppercase p-1 shadow-lg text-white w-24 rounded-md duration-300 hover:bg-gray-600">Add Item</button>
                     </div>
+
+                    <form className="flex flex-col space-y-3 p-3 border rounded-md">
+                        <h2 className="text-2xl text-center font-extrabold text-gray-600">Agregar Factura</h2>
+                        <input 
+                            type="text" 
+                            name="product" 
+                            placeholder="Producto"
+                            className="p-2 border-2 rounded-md" 
+                        />
+                        <input 
+                            type="text" 
+                            name="price" 
+                            placeholder="Precio" 
+                            className="p-2 border-2 rounded-md"  
+                        />
+                        <input 
+                            type="text" 
+                            name="quantity" 
+                            placeholder="Cantidad" 
+                            className="p-2 border-2 rounded-md" 
+                        />
+                    </form>
                 </div>
             </div>
         </div>
