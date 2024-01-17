@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import FacturasContext from "../context/FacturasProvider";
 
-const useCotizador = () => {
+const useFactura = () => {
     return useContext(FacturasContext)
 }
 
-export default useCotizador
+export default useFactura
