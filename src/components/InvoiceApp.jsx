@@ -5,6 +5,7 @@ import { InvoiceInfo } from "./InvoiceInfo"
 import { InvoiceView } from "./InvoiceView"
 import { TableProducts } from "./TableProducts"
 import { TotalView } from "./TotalView"
+import { Alert } from "./Alert"
 
 
 export const InvoiceApp = () => {
@@ -13,20 +14,34 @@ export const InvoiceApp = () => {
     const [productValue, setProductValue] = useState('')
     const [priceValue, setPriceValue] = useState(0)
     const [quantityValue, setQuantityValue] = useState(0)
-
+    
     const [items, setItems] = useState(itemsInitial)
 
+    const [mensaje, setMensaje] = useState('')
 
     const handleSubmit = e => {
         e.preventDefault()
 
+        if([productValue, priceValue, quantityValue].includes('')) {
+            setMensaje('Todos los Campos son Obligatorios')
+            setTimeout(() => {
+                setMensaje('')
+            },3000)
+            return
+        }
+        setMensaje('')
+
         setItems([...items, {
-            key: 4,
+            id: 5,
             product: productValue, 
-            price: priceValue, 
-            quantity: quantityValue
+            price: +priceValue, 
+            quantity: +quantityValue
         }])
 
+        // Clear Form
+        setProductValue('')
+        setPriceValue(0)
+        setQuantityValue(0)
     }
 
   return (
@@ -64,14 +79,19 @@ export const InvoiceApp = () => {
                     />
 
                     <form 
-                         onSubmit={handleSubmit}
-                        className="flex flex-col space-y-3 p-3 border rounded-md mt-10">
+                        onSubmit={handleSubmit}
+                        className="flex flex-col space-y-3 p-3 border rounded-md mt-10"
+                    >
+
+                        { mensaje && <Alert className="text-center" mensaje='Todos los campos son Obligatorios'>{mensaje}</Alert> }
                         <h2 className="text-2xl text-center font-extrabold text-gray-600">Agregar Factura</h2>
                         <input 
                             type="text" 
                             name="product" 
+                            id="product" 
                             placeholder="Producto"
-                            className="p-2 border-2 rounded-md" 
+                            className="p-2 border-2 rounded-md"
+                            value={ productValue } 
                             onChange={ e => {
                                 e.target.value 
                                 setProductValue(e.target.value)
@@ -79,20 +99,24 @@ export const InvoiceApp = () => {
                            
                         />
                         <input 
-                            type="text" 
+                            type="number" 
                             name="price" 
+                            id="price" 
                             placeholder="Precio" 
                             className="p-2 border-2 rounded-md"
+                            value={ priceValue }
                             onChange={ e => {
                                 e.target.value 
                                 setPriceValue(e.target.value)
                             }}  
                         />
                         <input 
-                            type="text" 
+                            type="number" 
                             name="quantity" 
+                            id="quantity" 
                             placeholder="Cantidad" 
                             className="p-2 border-2 rounded-md"
+                            value={ quantityValue }
                             onChange={ e => {
                                 e.target.value 
                                 setQuantityValue(e.target.value)
